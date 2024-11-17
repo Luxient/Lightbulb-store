@@ -26,30 +26,30 @@ export default function Footer() {
 
         {/* Social Media Links */}
         <div className="flex gap-4 mt-4">
-          <a
+          <Link
             href="https://www.facebook.com"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-400 text-sm flex items-center gap-1"
           >
             <FaFacebook size={20} /> Facebook
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://www.instagram.com"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-400 text-sm flex items-center gap-1"
           >
             <FaInstagram size={20} /> Instagram
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://www.twitter.com"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-400 text-sm flex items-center gap-1"
           >
             <FaTwitter size={20} /> Twitter
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

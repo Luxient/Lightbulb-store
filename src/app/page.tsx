@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Image from "next/image";
 import ProductCard from "../components/ProductCard"; // Import ProductCard component
 
@@ -45,37 +46,37 @@ export default function Home() {
         <div className="container mx-auto text-center flex flex-col items-center gap-6">
           <p className="text-lg font-semibold mb-4">
             Need help? Email us at{" "}
-            <a
+            <Link
               href="mailto:support@lightbulbstore.com"
               className="underline hover:text-blue-300 transition-colors duration-300"
             >
               support@lightbulbstore.com
-            </a>
+            </Link>
           </p>
           <div className="flex justify-center gap-8 mb-4 text-2xl">
-            <a href="#" aria-label="Facebook" className="hover:text-blue-400 transition-colors duration-300">
+            <Link href="#" aria-label="Facebook" className="hover:text-blue-400 transition-colors duration-300">
               <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" aria-label="Instagram" className="hover:text-pink-400 transition-colors duration-300">
+            </Link>
+            <Link href="#" aria-label="Instagram" className="hover:text-pink-400 transition-colors duration-300">
               <i className="fab fa-instagram"></i>
-            </a>
-            <a href="#" aria-label="Twitter" className="hover:text-blue-400 transition-colors duration-300">
+            </Link>
+            <Link href="#" aria-label="Twitter" className="hover:text-blue-400 transition-colors duration-300">
               <i className="fab fa-twitter"></i>
-            </a>
+            </Link>
           </div>
           <nav className="flex gap-6 text-lg">
-            <a href="/" className="hover:underline hover:text-blue-300 transition-colors duration-300">
+            <Link href="/" className="hover:underline hover:text-blue-300 transition-colors duration-300">
               Home
-            </a>
-            <a href="/products" className="hover:underline hover:text-blue-300 transition-colors duration-300">
+            </Link>
+            <Link href="/products" className="hover:underline hover:text-blue-300 transition-colors duration-300">
               Products
-            </a>
-            <a href="/cart" className="hover:underline hover:text-blue-300 transition-colors duration-300">
+            </Link>
+            <Link href="/cart" className="hover:underline hover:text-blue-300 transition-colors duration-300">
               Cart
-            </a>
-            <a href="/checkout" className="hover:underline hover:text-blue-300 transition-colors duration-300">
+            </Link>
+            <Link href="/checkout" className="hover:underline hover:text-blue-300 transition-colors duration-300">
               Checkout
-            </a>
+            </Link>
           </nav>
         </div>
       </footer>
