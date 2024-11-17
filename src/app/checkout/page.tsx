@@ -46,7 +46,7 @@ export default function CheckoutPage() {
   };
 
   const validateForm = () => {
-    let errors = {
+    const errors = {
       fullName: "",
       address: "",
       city: "",

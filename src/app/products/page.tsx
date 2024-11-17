@@ -3,8 +3,8 @@
 import ProductCard from "../../components/ProductCard";
 
 const products = [
-  { id: 1, name: "LED Light Bulb", price: 5.99, image: "/images/led-bulb.jpg" },
-  { id: 2, name: "Halogen Light Bulb", price: 3.99, image: "/images/halogen-bulb.jpg" },
+  { id: 1, name: "LED Light Bulb", price: 5.99, image: "/images/led-lightbulb.jpg" },
+  { id: 2, name: "Halogen Light Bulb", price: 3.99, image: "/images/halogen-lightbulb.jpg" },
 ];
 
 export default function ProductsPage() {

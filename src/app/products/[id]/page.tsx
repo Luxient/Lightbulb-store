@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../../features/cartSlice";
@@ -12,18 +13,12 @@ interface Product {
   name: string;
   price: number;
   description: string;
-  image: string | null; // image can be null initially
+  image: string; // Image should be a string that points to the image name in /public/images
 }
 
 const ProductDetailPage = () => {
   const params = useParams(); // Retrieve the params using the useParams hook
-  const [product, setProduct] = useState<Product>({
-    id: 0,
-    name: "",
-    price: 0,
-    description: "",
-    image: null, // Use null instead of empty string initially
-  });
+  const [product, setProduct] = useState<Product | null>(null); // Initially null to indicate loading
 
   const dispatch = useDispatch<AppDispatch>();
   const [loading, setLoading] = useState(false);
@@ -31,17 +26,36 @@ const ProductDetailPage = () => {
 
   useEffect(() => {
     // Mock fetching the product data based on the ID from params
-    const fetchedProduct: Product = {
-      id: parseInt(params.id as string),
-      name: "Halogen Light Bulb",
-      price: 3.99,
-      description: "A bright halogen light bulb, perfect for clear visibility.",
-      image: "/images/halogen-lightbulb.jpg",
-    };
-    setProduct(fetchedProduct);
+    const products: Product[] = [
+      {
+        id: 1,
+        name: "LED Light Bulb",
+        price: 5.99,
+        description: "An energy-efficient LED light bulb, perfect for long-lasting illumination.",
+        image: "led-lightbulb.jpg",
+      },
+      {
+        id: 2,
+        name: "Halogen Light Bulb",
+        price: 3.99,
+        description: "A bright halogen light bulb, perfect for clear visibility.",
+        image: "halogen-lightbulb.jpg",
+      },
+    ];
+
+    const fetchedProduct = products.find((p) => p.id === parseInt(params.id as string));
+
+    if (fetchedProduct) {
+      setProduct(fetchedProduct);
+    } else {
+      // Optionally handle a case where the product is not found
+      console.error("Product not found");
+    }
   }, [params]);
 
   const handleAddToCart = () => {
+    if (!product) return; // Ensure product exists before trying to add to cart
+
     setLoading(true);
     dispatch(
       addItem({
@@ -59,19 +73,29 @@ const ProductDetailPage = () => {
     }, 500); // Simulate a short loading time for UX purposes
   };
 
+  if (!product) {
+    // Show a loading message or spinner while product data is being fetched
+    return (
+      <div className="container mx-auto p-10 text-center">
+        <ClipLoader size={50} color="#3b82f6" /> {/* Loading spinner */}
+        <p className="mt-4 text-lg">Loading product details...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-10">
       <div className="bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row gap-10">
         {/* Product Image */}
-        {product.image && ( // Render only if product.image is not null
-          <div className="flex-shrink-0">
-            <img
-              src={product.image}
-              alt={`Product image of ${product.name}`}
-              className="rounded-md"
-            />
-          </div>
-        )}
+        <div className="flex-shrink-0">
+          <Image
+            src={`/images/${product.image}`}
+            alt={`Product image of ${product.name}`}
+            className="rounded-md"
+            width={400}
+            height={400}
+          />
+        </div>
 
         {/* Product Info */}
         <div className="flex-grow">
@@ -84,7 +108,7 @@ const ProductDetailPage = () => {
             onClick={handleAddToCart}
             className="mt-4 bg-blue-600 text-white py-2 px-4 rounded flex items-center gap-2 transition-transform duration-300 hover:scale-105 hover:bg-blue-500 active:scale-95"
             disabled={loading}
-            >
+          >
             {loading ? <ClipLoader size={20} color="#ffffff" /> : "Add to Cart"}
           </button>
 

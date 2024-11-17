@@ -22,7 +22,7 @@ const ProductCard = ({ id, name, price, image }: ProductCardProps) => {
   const router = useRouter();
 
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
+    e.stopPropagation(); // Prevent the card click from firing when the button is clicked
     setLoading(true);
     dispatch(
       addItem({
@@ -68,7 +68,7 @@ const ProductCard = ({ id, name, price, image }: ProductCardProps) => {
         {loading ? <ClipLoader size={20} color="#ffffff" /> : "Add to Cart"}
       </button>
       {feedbackMessage && (
-        <div className="mt-2 text-green-600 text-sm transition-opacity duration-300 opacity-100">
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white py-1 px-3 rounded-md transition-opacity duration-300 opacity-100">
           {feedbackMessage}
         </div>
       )}
